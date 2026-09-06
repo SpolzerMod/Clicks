@@ -1,0 +1,17 @@
+rootProject.name = 'clicks'
+
+def target = providers.gradleProperty('mc')
+        .orElse(providers.gradleProperty('default_mc'))
+        .get()
+
+def pin = new Properties()
+def versionFile = new File(settingsDir, "versions/${target}.properties")
+if (!versionFile.isFile()) {
+    throw new GradleException("Unsupported Minecraft version '${target}'. Choose a version from versions/ using -Pmc=<version>.")
+}
+versionFile.withInputStream { pin.load(it) }
+
+gradle.rootProject { project ->
+    project.ext.target = target
+    project.ext.pin = pin
+}

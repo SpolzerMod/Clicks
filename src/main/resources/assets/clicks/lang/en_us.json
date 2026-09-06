@@ -1,0 +1,19 @@
+{
+	"clicks.title": "Clicks",
+	"clicks.lmb": "LMB",
+	"clicks.rmb": "RMB",
+	"clicks.counting": "Counting",
+	"clicks.counting.on": "Running",
+	"clicks.counting.off": "Paused",
+	"clicks.hud": "HUD",
+	"clicks.hud.on": "Shown",
+	"clicks.hud.off": "Hidden",
+	"clicks.goals": "Goals",
+	"clicks.on": "On",
+	"clicks.off": "Off",
+	"clicks.goal.lmb": "Goal for LMB",
+	"clicks.goal.rmb": "Goal for RMB",
+	"clicks.reset": "Reset clicks",
+	"clicks.reset.again": "Click again",
+	"clicks.done": "Done"
+}

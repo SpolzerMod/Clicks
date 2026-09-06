@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "me.spolzer.clicks.mixin",
+	"compatibilityLevel": "${mixin_level}",
+	"client": [
+		"MouseHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

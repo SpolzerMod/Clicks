@@ -1,0 +1,19 @@
+{
+	"clicks.title": "Clicks",
+	"clicks.lmb": "ЛКМ",
+	"clicks.rmb": "ПКМ",
+	"clicks.counting": "Подсчёт",
+	"clicks.counting.on": "Идёт",
+	"clicks.counting.off": "На паузе",
+	"clicks.hud": "Худ",
+	"clicks.hud.on": "Показан",
+	"clicks.hud.off": "Скрыт",
+	"clicks.goals": "Цели",
+	"clicks.on": "Вкл",
+	"clicks.off": "Выкл",
+	"clicks.goal.lmb": "Цель для ЛКМ",
+	"clicks.goal.rmb": "Цель для ПКМ",
+	"clicks.reset": "Сбросить клики",
+	"clicks.reset.again": "Нажми ещё раз",
+	"clicks.done": "Готово"
+}

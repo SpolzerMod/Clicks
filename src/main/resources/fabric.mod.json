@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "clicks",
+	"version": "${version}",
+	"name": "Clicks",
+	"description": "A persistent mouse click counter with a movable HUD and separate goals for each button.",
+	"authors": [
+		"Spolzer"
+	],
+	"license": "ARR",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"me.spolzer.clicks.Clicks"
+		],
+		"modmenu": [
+			"me.spolzer.clicks.ModMenu"
+		]
+	},
+	"mixins": [
+		"clicks.mixins.json"
+	],
+	"suggests": {
+		"modmenu": "*"
+	},
+	"depends": {
+		"fabricloader": ">=${loader_req}",
+		"minecraft": "${mc_range}",
+		"java": ">=${java_req}",
+		"${api_id}": "*"
+	}
+}

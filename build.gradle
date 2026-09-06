@@ -1,0 +1,106 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath "net.fabricmc:fabric-loom:${pin.loom_version}"
+    }
+}
+
+apply plugin: pin.loom_plugin
+
+boolean remap = Boolean.parseBoolean(pin.remap)
+int release = Integer.parseInt(pin.java_version)
+
+version = "${project.mod_version}+${pin.minecraft_version}"
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "src/${pin.port}/java"
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'Terraformers'
+        url = 'https://maven.terraformersmc.com/releases/'
+    }
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+    minecraft "com.mojang:minecraft:${pin.minecraft_version}"
+
+    if (remap) {
+        mappings loom.officialMojangMappings()
+    }
+
+    add(remap ? 'modImplementation' : 'implementation', "net.fabricmc:fabric-loader:${pin.loader_version}")
+    add(remap ? 'modImplementation' : 'implementation', "net.fabricmc.fabric-api:fabric-api:${pin.fabric_version}")
+    add(remap ? 'modCompileOnly' : 'compileOnly', "com.terraformersmc:modmenu:${pin.modmenu_version}") { transitive = false }
+    add(remap ? 'modLocalRuntime' : 'localRuntime', "com.terraformersmc:modmenu:${pin.modmenu_version}") { transitive = false }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mc_range', pin.mc_range
+    inputs.property 'loader_req', pin.loader_req
+    inputs.property 'java_req', pin.java_version
+    inputs.property 'mixin_level', pin.mixin_level
+    inputs.property 'api_id', pin.api_id
+
+    filesMatching(['fabric.mod.json', 'clicks.mixins.json']) {
+        expand version: project.version,
+                mc_range: pin.mc_range,
+                loader_req: pin.loader_req,
+                java_req: pin.java_version,
+                mixin_level: pin.mixin_level,
+                api_id: pin.api_id
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = release
+}
+
+test {
+    useJUnitPlatform()
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(release)
+    targetCompatibility = JavaVersion.toVersion(release)
+    withSourcesJar()
+}
+
+tasks.named('sourcesJar') {
+    from('LICENSE')
+}
+
+jar {
+    from('LICENSE')
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'Clicks',
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Spolzer'
+        )
+    }
+}
